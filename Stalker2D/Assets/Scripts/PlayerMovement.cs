@@ -1,33 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private float defaultSpeed;
+    private float _defaultSpeed;
 
-    private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D _rb;
+    private SpriteRenderer _spriteRenderer;
 
-    public float Speed => defaultSpeed;
+    public float Speed => _defaultSpeed;
 
     private void Awake()
     {
-        spriteRenderer = this.GetComponentInChildren<SpriteRenderer>();
-        rb = this.GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _rb = GetComponent<Rigidbody2D>();
     }
-
-
-
     public void Run(Vector2 direction)
     {
         if (direction.sqrMagnitude != 1)
         {
             direction = direction.normalized;
         }
-        rb.velocity = direction * Speed;
-        spriteRenderer.flipX = direction.x < 0;
+        _rb.velocity = direction * Speed;
+        _spriteRenderer.flipX = direction.x < 0;
 
     }
 }

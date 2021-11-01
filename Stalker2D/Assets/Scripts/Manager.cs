@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class Manager<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T m_Instance;
+    private static T _Instance;
 
     public static T Instance
     {
         get
         {
-            if (m_Instance == null)
+            if (_Instance == null)
             {
-                m_Instance = (T)FindObjectOfType(typeof(T));
+                _Instance = (T)FindObjectOfType(typeof(T));
             }
 
-            return m_Instance;
+            return _Instance;
         }
     }
 }

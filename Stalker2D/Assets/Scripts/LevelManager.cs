@@ -1,25 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : Manager<LevelManager>
 {
-    private GameObject m_playerObject;
+    private GameObject _playerObject;
 
     [SerializeField]
-    private Transform startPoint;
+    private Transform _startPoint;
     [SerializeField]
-    private GameObject playerPrefab;
+    private GameObject _playerPrefab;
+    [SerializeField]
+    private GameObject _inputControllerPrefab;
+    [SerializeField]
+    private GameObject _cameraPrefab;
+    [SerializeField]
+    private GameObject _uIControllerPrefab;
 
-    public GameObject PlayerObject
+    private GameObject _inputController;
+    private GameObject _camera;
+    private GameObject _uIController;
+
+    public GameObject PlayerObject => _playerObject;
+
+    private void Awake()
     {
-        get
-        {
-            if (m_playerObject == null)
-            {
-                m_playerObject = Instantiate(playerPrefab, startPoint);
-            }
-            return m_playerObject;
-        }
+        _playerObject = Instantiate(_playerPrefab, _startPoint);
+        _inputController = Instantiate(_inputControllerPrefab);
+        _uIController = Instantiate(_uIControllerPrefab);
+        _camera = Instantiate(_cameraPrefab);
     }
 }

@@ -1,40 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
     private interface IAction
     {
-        public void Launch();
+        void Launch();
     }
 
     private class Run : IAction
     {
-        private PlayerMovement m_player;
+        private PlayerMovement _player;
 
         public Run(PlayerMovement player)
         {
-            m_player = player;
+            _player = player;
         }
 
         public void Launch()
         {
             Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-            m_player.Run(direction.normalized);
+            _player.Run(direction.normalized);
         }
     }
 
-    private GameObject playerObject;
-    private PlayerMovement playerMovement;
+    private class Inventory : IAction
+    {
+        public void Launch()
+        {
+            if (Input.GetButtonDown("Inventory"))
+            {
+
+            }
+        }
+    }
+
+    private GameObject _playerObject;
+    private PlayerMovement _playerMovement;
 
     private IAction[] actions;
 
     private void Awake()
     {
-        playerObject = LevelManager.Instance.PlayerObject;
-        playerMovement = playerObject.GetComponent<PlayerMovement>();
-        actions = new IAction[] { new Run(playerMovement) };
+        _playerObject = LevelManager.Instance.PlayerObject;
+        _playerMovement = _playerObject.GetComponent<PlayerMovement>();
+        actions = new IAction[] { new Run(_playerMovement) };
     }
 
     private void Update()
